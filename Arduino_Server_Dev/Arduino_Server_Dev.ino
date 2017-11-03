@@ -1,6 +1,7 @@
 #include <SPI.h>
 #include <UIPEthernet.h> // Identical with Ethernet.h, but works with the module
 #include "dht.h"  // Temp and humidity sensor lib
+#include "HashMap.h"
 
 // Defining temp and humidity sensor
 #define sensor A0
