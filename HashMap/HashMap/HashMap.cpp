@@ -19,10 +19,11 @@ unsigned int HashMap::getIndex(const std::string &key)
 void HashMap::append(const std::string &key, void(*f)(void))
 {
 	unsigned int index = getIndex(key);
-	m_map[index].push_back(f);
+	m_map[index].append(key, f);
 }
 
 void HashMap::run(const std::string & key)
 {
 	unsigned int index = getIndex(key);
+	m_map[index].get(key)();
 }
