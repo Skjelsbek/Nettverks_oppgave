@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 
 template <class KEY, class VALUE>
 class LinkedList

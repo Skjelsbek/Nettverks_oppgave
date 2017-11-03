@@ -1,7 +1,7 @@
 #include <SPI.h>
 #include <UIPEthernet.h> // Identical with Ethernet.h, but works with the module
 #include "dht.h"  // Temp and humidity sensor lib
-#include "HashMap.h"
+#include <LinkedList.h>
 
 // Defining temp and humidity sensor
 #define sensor A0
@@ -13,11 +13,7 @@ char *_buffer;
 // Current index in buffer (used when receiving)
 int index;
 
-// Used to determine what task to be executed
-const String readTemp = "check_temp";
-const String readHum = "check_hum";
-const String _update = "update";
-const String discon = "disconnect";
+LinkedList<String, void(*)(void)> list;
 
 //Setting up unique MAC address for the arduino
 byte mac[] = {
@@ -32,6 +28,8 @@ IPAddress subnet(255, 255, 255, 0);
 
 // Using "random" port above 1000 to not interfare with reserved ports
 EthernetServer server(27015);
+
+EthernetClient client;
 
 // Whether or not the client was connected previously
 boolean alreadyConnected = false;
@@ -89,6 +87,29 @@ void sendTemp() {
   server.println(temp);
 }
 
+void sendHum(){
+  // Sends humidity to client        
+  DHT.read11(sensor);
+  int hum = (int)DHT.humidity;
+  server.println(hum);
+}
+
+void _update(){
+  DHT.read11(sensor);
+  int temp = (int)DHT.temperature;
+  int hum = (int)DHT.humidity;
+  String s = itos(temp, ilen(temp)) + ", " + itos(hum, ilen(hum));
+  Serial.println(s);
+  server.print(s); 
+}
+
+void discon(){
+  // If client sends dsiconnect, stop the communication
+  alreadyConnected = false;
+  client.stop();
+  Serial.println("Client disconnected!");
+}
+
 void setup() {
   // initialize the ethernet device
   Ethernet.begin(mac, ip, myDns, gateway, subnet);
@@ -109,11 +130,16 @@ void setup() {
   // Instantiate buffer
   _buffer = new char[1024];  
   index = 0; 
+
+  list.append("check_temp", sendTemp);
+  list.append("check_hum", sendHum);
+  list.append("update", _update);
+  list.append("disconnect", discon);
 }
 
 void loop() {
   // Wait for a new client
-  EthernetClient client = server.available();
+  client = server.available();
 
   // When the client sends the first byte, say hello
   if (client) {
@@ -132,32 +158,8 @@ void loop() {
         
     if (index > 0 && _buffer[index - 1] == '\0') {
       Serial.println();
-      if (inBuffer(readTemp.c_str(), readTemp.length())) {
-        // Sends temperature to client
-        DHT.read11(sensor);
-        int temp = (int)DHT.temperature;
-        server.println(temp);
-      } else if (inBuffer(readHum.c_str(), readHum.length())) {
-        // Sends humidity to client        
-        DHT.read11(sensor);
-        int hum = (int)DHT.humidity;
-        server.println(hum);
-      } else if (inBuffer(_update.c_str(), _update.length())) {
-        DHT.read11(sensor);
-        int temp = (int)DHT.temperature;
-        int hum = (int)DHT.humidity;
-        String s = itos(temp, ilen(temp)) + ", " + itos(hum, ilen(hum));
-        Serial.println(s);
-        server.print(s); 
-      } else if (inBuffer(discon.c_str(), discon.length())) {
-        // If client sends dsiconnect, stop the communication
-        alreadyConnected = false;
-        client.stop();
-        Serial.println("Client disconnected!");
-      }  else {
-        // If the user didn't type any of the above commands, send error message
-        server.println("Type check_temp to get temperature, or check_hum to get humidity!");
-      }
+      String s = _buffer;
+      list.get(s)();     
 
       // Clear input buffers
       client.flush();
