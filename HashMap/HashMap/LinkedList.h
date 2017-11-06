@@ -17,7 +17,7 @@ public:
 
 	void append(const KEY &key, const VALUE &value);
 	VALUE &get(const KEY &key);
-	bool &find(const KEY &key);
+	bool find(const KEY &key);
 };
 
 template<class KEY, class VALUE>
@@ -81,7 +81,7 @@ inline VALUE &LinkedList<KEY, VALUE>::get(const KEY &key)
 }
 
 template<class KEY, class VALUE>
-inline bool & LinkedList<KEY, VALUE>::find(const KEY &key)
+inline bool LinkedList<KEY, VALUE>::find(const KEY &key)
 {
 	if (m_key == key)
 		return true;

@@ -24,7 +24,7 @@ void disconnect()
 
 int main()
 {
-	std::string test[] = { "update", "check_temp", "check_hum", "disconnect" };
+	/*std::string test[] = { "update", "check_temp", "check_hum", "disconnect" };
 	HashMap<std::string, void(*)(void)> map;
 	map.append("update", update);
 	map.append("temp", check_temp);
@@ -33,10 +33,10 @@ int main()
 	map.run("update");
 	map.run("hum");
 	map.run("discon");
-	map.run("temp");
+	map.run("temp");*/
 
 
-	/*std::string s1 = "snicker1";
+	std::string s1 = "snicker1";
 	std::string s2 = "snicker2";
 	std::string s3 = "snicker3";
 
@@ -44,9 +44,9 @@ int main()
 	nilsList.append(s1, update);
 	nilsList.append(s2, check_hum);
 	nilsList.append(s3, check_temp);
-
+	nilsList.find(s3);
 	nilsList.get(s1)();
 	nilsList.get(s2)();
-	nilsList.get(s3)();*/
+	nilsList.get(s3)();
 	system("pause");
 }
