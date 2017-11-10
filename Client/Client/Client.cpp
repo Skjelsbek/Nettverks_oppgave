@@ -63,18 +63,6 @@ void Client::serverConnect()
 	std::cout << "Connected to server!\n";
 }
 
-void Client::promptUser()
-{	
-	// User input prompt
-	getline(std::cin, userInput);
-	if (userInput.size() > 0)
-	{				
-		// If the user typed something, grap the corresponding function from map, run in a thread.				
-		std::thread t1((this->map.get(userInput)), this);
-		t1.detach(); // Detach the thread so we're still able to operate the main thread
-	}
-}
-
 void Client::addFuncPointers()
 {
 	// Adding methods with corresponding key to map
@@ -86,6 +74,18 @@ void Client::addFuncPointers()
 	map.append("stop", &Client::stopUpdate);
 	map.append("disconnect", &Client::dc);
 	map.setDefault(&Client::sendAndReceive);
+}
+
+void Client::promptUser()
+{
+	// User input prompt
+	getline(std::cin, userInput);
+	if (userInput.size() > 0)
+	{
+		// If the user typed something, grap the corresponding function from map, run in a thread.				
+		std::thread t1((this->map.get(userInput)), this);
+		t1.detach(); // Detach the thread so we're still able to operate the main thread
+	}
 }
 
 void Client::sendAndReceive()

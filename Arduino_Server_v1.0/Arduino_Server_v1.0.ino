@@ -39,7 +39,7 @@ void clearBuffer() {
   index = 0;
 }
 
-// Calculates number of numbers in an integer
+// Calculates number of digits in an integer
 int ilen(int num) {
   int len = 0;
   while (num != 0) {
@@ -132,7 +132,7 @@ void loop() {
     if (!alreadyConnected) {      
       client.flush(); // Clear the input buffer
       Serial.println("We have a new client");
-      client.print("Hello, client!");
+      server.print("Hello, client!");
       alreadyConnected = true;
     }
 

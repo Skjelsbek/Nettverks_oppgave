@@ -35,10 +35,10 @@ public:
 	~Client();
 	void serverInit(const std::string & ip, const unsigned int & port);
 	void serverConnect();
-	void promptUser();
 	void addFuncPointers();
-	void update();
+	void promptUser();
 	void sendAndReceive();
+	void update();
 	struct tm getCurrentTime();
 	void updateCSV();
 	void updateDay();
