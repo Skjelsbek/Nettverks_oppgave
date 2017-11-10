@@ -85,7 +85,7 @@ void _update(){
   DHT.read11(sensor);
   int temp = (int)DHT.temperature;
   int hum = (int)DHT.humidity;
-  String s = itos(temp) + ", " + itos(hum);
+  String s = itos(temp) + "," + itos(hum);
   server.print(s);
   Serial.println("Update sent!");
 }
