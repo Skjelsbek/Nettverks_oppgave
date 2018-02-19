@@ -146,8 +146,8 @@ void Client::updateCSV()
 		struct tm currentTime = getCurrentTime();
 		std::ostringstream oss;
 		buffer[bytesReceived] = '\0';
-		oss << std::setfill('0') << std::setw(2) << currentTime.tm_mday << "." << std::setfill('0') << std::setw(2) << currentTime.tm_mon + 1 << "." << currentTime.tm_year + 1900 << ", ";
-		oss << std::setfill('0') << std::setw(2) << currentTime.tm_hour << ":" << std::setfill('0') << std::setw(2) << currentTime.tm_min << ", ";
+		oss << std::setfill('0') << std::setw(2) << currentTime.tm_mday << "." << std::setfill('0') << std::setw(2) << currentTime.tm_mon + 1 << "." << currentTime.tm_year + 1900 << ",";
+		oss << std::setfill('0') << std::setw(2) << currentTime.tm_hour << ":" << std::setfill('0') << std::setw(2) << currentTime.tm_min << ",";
 		oss << buffer << std::endl;
 
 		// Find length of file

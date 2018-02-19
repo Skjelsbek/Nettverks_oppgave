@@ -1,0 +1,28 @@
+﻿  SpaceScaling.cpp
+  Object.cpp
+d:\nils\cpp\sfml\sfml\object.cpp(15): warning C4305: '+=': truncation from 'double' to 'float'
+d:\nils\cpp\sfml\sfml\object.cpp(33): warning C4018: '<': signed/unsigned mismatch
+  Matrix.cpp
+d:\nils\cpp\sfml\sfml\matrix.cpp(70): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\nils\cpp\sfml\sfml\matrix.cpp(71): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\nils\cpp\sfml\sfml\matrix.cpp(72): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\nils\cpp\sfml\sfml\matrix.cpp(73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\nils\cpp\sfml\sfml\matrix.cpp(74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\nils\cpp\sfml\sfml\matrix.cpp(75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\nils\cpp\sfml\sfml\matrix.cpp(76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\nils\cpp\sfml\sfml\matrix.cpp(77): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Main.cpp
+d:\nils\cpp\sfml\sfml\main.cpp(141): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\nils\cpp\sfml\sfml\main.cpp(170): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Graph.cpp
+d:\nils\cpp\sfml\sfml\graph.cpp(21): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+d:\nils\cpp\sfml\sfml\graph.cpp(21): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+  Extras.cpp
+d:\nils\cpp\sfml\sfml\extras.cpp(23): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+  Axis.cpp
+d:\nils\cpp\sfml\sfml\axis.cpp(109): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+d:\nils\cpp\sfml\sfml\axis.cpp(123): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+d:\nils\cpp\sfml\sfml\axis.cpp(196): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+d:\nils\cpp\sfml\sfml\axis.cpp(210): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+sfml-graphics.lib(sfml-graphics-2.dll) : fatal error LNK1112: module machine type 'x86' conflicts with target machine type 'x64'
